@@ -7,3 +7,12 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-image: url('./assets/flag-background.svg');
+    background-repeat: repeat;
+    color: var(--black-color);
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
