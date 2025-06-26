@@ -5,3 +5,5 @@
     --black-color: #15151e;
     --light-grey-color: #F0F0F0;
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
