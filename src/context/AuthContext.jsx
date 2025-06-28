@@ -3,4 +3,4 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { loginUser as loginUserApi } from '../api/authApi';
 
-
+const AuthContext = createContext(null);
