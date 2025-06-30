@@ -49,3 +49,57 @@ export function AuthProvider({ children }) {
         }
         setIsLoading(false);
     }, [token]);
+
+// Stap 1: useEffect die runt wanneer de favorietenlijst verandert.
+// Stap 2: Als er een gebruiker is, sla de favorieten op in localStorage.
+// Satp 3: We maken de key uniek per gebruiker.
+
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem(`favorites_${user.username}`, JSON.stringify(favorites));
+        }
+    }, [favorites, user]);
+
+// Stap 1: Functie om in te loggen.
+// Stap 2: Roep de API aan om de JWT op te halen.
+// Stap 3: Sla de token op in localStorage.
+// Stap 4: Update de token.
+// Stap 5: Stuur de gebruiker door naar de nieuwspagina.
+
+    const login = async (credentials) => {
+        const { jwt } = await loginUserApi(credentials);
+        localStorage.setItem('token', jwt);
+        setToken(jwt);
+        navigate('/nieuws');
+    };
+
+// Stap 1: Functie om uit te loggen.
+// Stap 2: Verwijder de token uit localStorage.
+// Stap 3: Reset ook de favorietenlijst.
+// Stap 4: Stuur de gebruiker terug naar de homepage.
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        setToken(null);
+        setUser(null);
+        setFavorites([]);
+        navigate('/');
+    };
+
+// Stap1: Functies om favorieten te beheren.
+// Stap2: De 'value' die we via de Context Provider beschikbaar stellen aan de hele app.
+
+    const addFavorite = (item) => { setFavorites(prev => [...prev, item]); };
+    const removeFavorite = (itemId) => { setFavorites(prev => prev.filter(i => i.id !== itemId)); };
+    const isFavorite = (itemId) => favorites.some(fav => fav.id === itemId);
+
+    const value = { user, isAuthenticated: !!user, favorites, isLoading, login, logout, addFavorite, removeFavorite, isFavorite };
+
+    return (
+        <AuthContext.Provider value={value}>
+            {!isLoading && children}
+        </AuthContext.Provider>
+    );
+}
+
+export function useAuth() { return useContext(AuthContext); }
