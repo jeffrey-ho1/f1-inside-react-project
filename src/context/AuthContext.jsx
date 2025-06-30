@@ -24,3 +24,28 @@ export function AuthProvider({ children }) {
     });
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+
+// Stap 1: useEffect die runt wanneer het token verandert (bij inloggen, uitloggen, of pageload).
+// Satp 2: Als er een token is in localStorage, decodeer de token om de data te kunnen lezen.
+// Satp 3: Controleer of de token nog niet verlopen is.
+// Stap 4: Stel de gebruiker in op basis van de subject uit de token, dit is de gebruikersnaam.
+// Stap 5: Als er iets misgaat met de token (ongeldig of verlopen), log de gebruiker uit.
+// Stap 6: Geef aan dat de check klaar is, zodat de rest van de app kan renderen.
+
+    useEffect(() => {
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                if (decodedToken.exp * 1000 < Date.now()) {
+                    throw new Error("Token is verlopen.");
+                }
+                setUser({ username: decodedToken.sub });
+            } catch (e) {
+                console.error("Token ongeldig, uitloggen.", e);
+                localStorage.removeItem('token');
+                setToken(null);
+                setUser(null);
+            }
+        }
+        setIsLoading(false);
+    }, [token]);
