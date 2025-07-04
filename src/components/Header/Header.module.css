@@ -1,0 +1,113 @@
+.outerContainerHeader{
+}
+
+.header {
+        display: flex;
+        justify-content:  space-between;
+        align-items: center;
+        background-color: var(--black-color);
+        height: 80px;
+        padding: 0 2rem;
+        width: 100%;
+        box-sizing: border-box;
+}
+
+.headerLogo {
+}
+
+.logoImage {
+        height: 45px;
+        width: auto;
+        display: block;
+}
+
+.navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e10600;
+        padding: 0.75rem 2.5rem;
+}
+
+.navigationUl {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+}
+
+.navLink {
+        text-decoration: none;
+        color: var(--white-color);
+        font-weight: 500;
+        padding: 5px 0;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.3s;
+}
+
+.navLink:hover {
+        color: var(--white-color);
+        font-weight: bolder;
+}
+
+.activeLink {
+        composes: navLink;
+        border-bottom-color: var(--white-color);
+        border-bottom-width: medium;
+        color: var(--white-color);
+}
+
+.actionButtonsContainer {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+}
+
+.iconButtonSetting {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #15151e;
+        cursor: pointer;
+}
+
+.iconButtonUser {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #15151e;
+        cursor: pointer;
+}
+
+.iconButton:hover {
+        background-color: #c40000;
+}
+
+.searchButton {
+        background-color: white;
+        border: none;
+        border-radius: 999px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: opacity 0.2s ease-in-out;
+}
+
+.searchButton:hover {
+        opacity: 0.9;
+}
+
+.searchButton svg {
+        width: 20px;
+        height: 20px;
+        fill: #333333;
+}

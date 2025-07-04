@@ -1,0 +1,20 @@
+.profileButton {
+    background-color: var(--red-color);
+    color: var(--white-color);
+    border: none; width: 40px; height: 40px;
+    border-radius: 50%; display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.profileButton:hover {
+    background-color: #b40400;
+    transform: scale(1.1);
+}
+.icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}

@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import FavorietenPage from './pages/FavorietenPage.jsx';
 
+
 function App() {
     return (
 // Een div die de hele viewport vult en de footer onderaan zet.

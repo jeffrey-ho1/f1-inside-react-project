@@ -1,0 +1,53 @@
+.footer {
+    background-color: var(--black-color);
+    font-family: 'Inter', sans-serif;
+    color: white;
+    padding: 20px 40px;
+}
+
+.footerInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.copyright {
+    font-size: 14px;
+}
+
+.copyright a {
+    color: white;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.copyright a:hover {
+    text-decoration: underline;
+}
+
+.socials {
+    text-align: center;
+}
+
+.socialText {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.socialLogo {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    transition: transform 0.2s ease;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
