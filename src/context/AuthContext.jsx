@@ -1,9 +1,9 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, {createContext, useState, useContext, useEffect, useCallback} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { loginUser as loginUserApi } from '../api/authApi';
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 // Stap 1: Provider'-component. Deze component zal de hele app omvatten
 // en de state en functies beschikbaar maken voor alle "children".
@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
             try {
                 const decodedToken = jwtDecode(token);
                 if (decodedToken.exp * 1000 < Date.now()) {
-                    throw new Error("Token is verlopen.");
+                    logout();
                 }
                 setUser({ username: decodedToken.sub });
             } catch (e) {
@@ -48,7 +48,7 @@ export function AuthProvider({ children }) {
             }
         }
         setIsLoading(false);
-    }, [token]);
+    }, [logout,token]);
 
 // Stap 1: useEffect die runt wanneer de favorietenlijst verandert.
 // Stap 2: Als er een gebruiker is, sla de favorieten op in localStorage.
@@ -78,13 +78,14 @@ export function AuthProvider({ children }) {
 // Stap 3: Reset ook de favorietenlijst.
 // Stap 4: Stuur de gebruiker terug naar de homepage.
 
-    const logout = () => {
+
+    const logout = useCallback(() => {
         localStorage.removeItem('token');
         setToken(null);
         setUser(null);
         setFavorites([]);
         navigate('/');
-    };
+        }, [navigate]);
 
 // Stap1: Functies om favorieten te beheren.
 // Stap2: De 'value' die we via de Context Provider beschikbaar stellen aan de hele app.

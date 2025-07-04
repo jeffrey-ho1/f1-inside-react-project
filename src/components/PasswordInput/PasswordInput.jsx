@@ -7,7 +7,6 @@ import EyeClosedIcon from '../../assets/eye-closed.svg?react';
 function PasswordInput({ value, onChange, placeholder }) {
     const [isVisible, setIsVisible] = useState(false);
     const toggleVisibility = () => {
-        console.log("TEST: Wachtwoord zichtbaarheid wordt gewijzigd naar:", !isVisible);
         setIsVisible(prevIsVisible => !prevIsVisible);
     };
 //

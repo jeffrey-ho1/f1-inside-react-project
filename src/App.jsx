@@ -3,18 +3,17 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
-import HomePage from './pages/HomePage.jsx';
-import NewsPage from './pages/NewsPage.jsx';
-import WeatherPage from './pages/WeatherPage.jsx';
-import LoginPage from './pages/LoginPage.jsx';
-import RegisterPage from './pages/RegisterPage.jsx';
-import ProfilePage from './pages/ProfilePage.jsx';
-import FavorietenPage from './pages/FavorietenPage.jsx';
+import HomePage from './pages/Home/HomePage.jsx';
+import NewsPage from './pages/Nieuws/NewsPage.jsx';
+import WeatherPage from './pages/Weer/WeatherPage.jsx';
+import LoginPage from './pages/Login/LoginPage.jsx';
+import RegisterPage from './pages/Registreren/RegisterPage.jsx';
+import ProfilePage from './pages/Profiel/ProfilePage.jsx';
+import FavorietenPage from './pages/Favorieten/FavorietenPage.jsx';
 
 
 function App() {
     return (
-// Een div die de hele viewport vult en de footer onderaan zet.
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Header />
             <main className="container" style={{ flex: 1 }}>
