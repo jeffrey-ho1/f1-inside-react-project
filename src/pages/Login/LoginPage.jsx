@@ -13,7 +13,6 @@ function LoginPage() {
 
     useEffect(() => {
         const validity = username.length > 0 && password.length > 0;
-        console.log(`TEST: Login formulier velden gevuld? ${validity}`);
         setIsFormValid(validity);
     }, [username, password]);
 
@@ -21,10 +20,8 @@ function LoginPage() {
         event.preventDefault();
         setError('');
         try {
-            console.log("TEST: Inloggen met gegevens:", { username });
             await login({ username, password });
         } catch (err) {
-            console.error("TEST: API-fout bij inloggen:", err);
             setError(err.message || "Inloggen mislukt. Controleer je gegevens.");
         }
     };
