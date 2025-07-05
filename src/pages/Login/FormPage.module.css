@@ -1,0 +1,103 @@
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+}
+.form {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--black-color);
+}
+
+.formGroup {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--red-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: #b40400;
+}
+
+.submitButton:disabled {
+    background-color: #f8a0a0;
+    cursor: not-allowed;
+}
+
+.apiError {
+    color: var(--white-color);
+    background-color: var(--red-color);
+    padding: 12px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.errorText {
+    color: var(--red-color);
+    font-size: 0.8rem;
+    padding-top: 4px;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.formLink {
+    color: var(--red-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.formLink:hover {
+    text-decoration: underline;
+}
+
+.forgotPassword {
+    text-align: right;
+    font-size: 0.85rem;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.formFooter {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
