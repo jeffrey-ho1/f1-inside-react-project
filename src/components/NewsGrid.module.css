@@ -1,5 +1,32 @@
-.container {
+.gridContainer {
+    display: grid;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    gap: 20px;
+
+    /* Dit is de "tekening" van de layout waar de zin naar verwijst */
+    grid-template-areas:
+    "main   sidebar"
+    "small1 sidebar"
+    "small2 sidebar";
+
+    grid-template-columns: 2fr 1fr; /* De eerste kolom is 2x zo breed als de tweede */
+    grid-template-rows: auto 1fr 1fr; /* Rijen passen zich aan de content aan */
+}
+
+/* Koppel de gebieden aan de classNames uit de NewsGrid.jsx */
+.mainArticleArea {
+    grid-area: main;
+}
+
+.raceWidgetArea {
+    grid-area: sidebar;
+}
+
+.smallArticle1Area {
+    grid-area: small1;
+}
+
+.smallArticle2Area {
+    grid-area: small2;
 }

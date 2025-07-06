@@ -1,0 +1,16 @@
+.pageContainer {
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 80vh;
+}
+
+.error {
+    color: #D32F2F; /* Rood voor foutmeldingen */
+    background-color: #FFCDD2; /* Lichtrode achtergrond */
+    border: 1px solid #D32F2F;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 20px auto;
+}

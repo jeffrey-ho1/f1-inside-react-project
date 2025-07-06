@@ -6,19 +6,20 @@
     --white-color: #ffffff;
     --black-color: #15151e;
     --light-grey-color: #F0F0F0;
+    background-color: transparent;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background-image: url('./assets/flag-background.svg');
-    background-repeat: repeat;
+    min-height: 100vh;
     color: var(--black-color);
+    background-color: #15151e;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 1rem;
 }
