@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import HomePage from './pages/Home/HomePage.jsx';
 import NewsPage from './pages/Nieuws/NewsPage.jsx';
+import RacesPage from "./pages/Races/RacesPage.jsx";
 import WeatherPage from './pages/Weer/WeatherPage.jsx';
 import LoginPage from './pages/Login/LoginPage.jsx';
 import RegisterPage from './pages/Registreren/RegisterPage.jsx';
@@ -21,6 +22,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/nieuws" element={<NewsPage />} />
+                    <Route path="/races" element={<RacesPage />} />
                     <Route path="/weer" element={<WeatherPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />

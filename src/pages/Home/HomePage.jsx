@@ -1,6 +1,7 @@
-import react from 'react';
-function HomePage() {return <h1>Home Pagina</h1>;}
+import NewsGrid from '../../components/NewsGrid.jsx';
 
-
-export default HomePage;
-
+export default function HomePage() {
+    return (
+            <NewsGrid />
+    );
+}
