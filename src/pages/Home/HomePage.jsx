@@ -1,6 +1,11 @@
-import react from 'react';
-function HomePage() {return <h1>Home Pagina</h1>;}
+import React from 'react';
 
+export default function HomePage() {
 
-export default HomePage;
-
+    return (
+        <div style={{ padding: '2rem', textAlign: 'center' }}>
+            <h1>Welkom op F1 Inside</h1>
+            <p>Jouw portaal voor alles over Formule 1.</p>
+        </div>
+    );
+}

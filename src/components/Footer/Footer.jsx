@@ -13,17 +13,17 @@ function Footer() {
             <div className={styles.footerInner}>
                 <div className={styles.copyright}>
                     <p>
-                        © {currentYear} F1 Inside | <Link to="/news">Privacy Policy</Link> | <Link to="/news">Terms</Link>
+                        © {currentYear} F1 Inside | <Link to="/">Privacy Policy</Link> | <Link to="/">Terms</Link>
                     </p>
                 </div>
 
                 <div className={styles.socials}>
                     <div className={styles.socialText}>Volg ons op sociale media</div>
                     <div className={styles.socialLogo}>
-                        <Link to="/news"><Facebook className={styles.icon} /></Link>
-                        <Link to="/news"><X className={styles.icon} /></Link>
-                        <Link to="/news"><Instagram className={styles.icon} /></Link>
-                        <Link to="/news"><LinkedIn className={styles.icon} /></Link>
+                        <Link to="/"><Facebook className={styles.icon} /></Link>
+                        <Link to="/"><X className={styles.icon} /></Link>
+                        <Link to="/"><Instagram className={styles.icon} /></Link>
+                        <Link to="/"><LinkedIn className={styles.icon} /></Link>
                     </div>
                 </div>
             </div>
