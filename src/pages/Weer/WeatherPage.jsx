@@ -1,5 +1,14 @@
 import react from 'react';
-function WeatherPage() {return <h1>Weer Pagina</h1>;}
+import styles from './WeatherPage.module.css';
 
+
+function WeatherPage() {
+return (
+    <main className={styles.pageContainer}>
+        {/* Content */}
+        <p>Weer pagina wordt geladen...</p>
+    </main>
+);
+}
 
 export default WeatherPage;
