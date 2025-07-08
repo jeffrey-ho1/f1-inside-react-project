@@ -1,0 +1,31 @@
+.selectWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.selectorContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+}
+
+.selector {
+    appearance: none;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px 40px 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.selectArrow {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+}

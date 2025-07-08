@@ -1,0 +1,102 @@
+.card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    font-weight: bold;
+    color: var(--black-color);
+    margin: 0;
+    padding-bottom: 16px;
+}
+
+.mainInfo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.weatherIcon {
+    width: 80px;
+    height: 80px;
+}
+
+.tempSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.temperature {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.condition {
+    font-size: 1.5rem;
+    color: var(--black-color);
+    text-transform: capitalize;
+}
+
+.details {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 40px;
+    margin-left: auto;
+}
+
+.detailItem {
+    text-align: center;
+}
+
+.detailItem img {
+    height: 24px;
+    margin-bottom: 8px;
+}
+
+.detailItem span {
+    font-weight: bold;
+    display: block;
+}
+
+.detailItem p {
+    font-size: 0.8rem;
+    color: var(--black-color);
+    margin: 4px 0 0 0;
+}
+
+.extraDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-top: 16px;
+}
+
+.sunTimes {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.sunTimes span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--black-color);
+}
+
+.sunTimes img {
+    width: 24px;
+}
+
+.trackTemp {
+    color: var(--black-color);
+}
+.trackTemp strong {
+    font-size: 1.2rem;
+    font-weight: 700;
+}

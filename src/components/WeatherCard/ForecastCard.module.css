@@ -1,0 +1,26 @@
+.card {
+    text-align: center;
+}
+
+.card h3 {
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.forecastInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.weatherIcon {
+    width: 48px;
+    height: 48px;
+}
+
+.temps {
+    font-size: 1.1rem;
+    font-weight: bold;
+}

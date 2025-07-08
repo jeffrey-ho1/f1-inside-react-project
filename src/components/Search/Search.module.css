@@ -25,7 +25,7 @@
     left: 0;
     right: 0;
     background-color: var(--white-color);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--grey-color);
     border-radius: 8px;
     list-style: none;
     padding: 0;
@@ -35,7 +35,7 @@
 
 .suggestionItem, .noResults {
     padding: 10px 15px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--grey-color);
 }
 
 .suggestionItem:last-child {
@@ -48,6 +48,9 @@
 
 .noResults {
     color: var(--grey-color);
+    padding: 1rem;
+    text-align: center;
+    font-style: italic;
 }
 
 .suggestionType {

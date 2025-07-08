@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './NextRaceCard.module.css'; // Zorg dat het CSS-bestand ook bestaat
+import styles from './NextRaceCard.module.css';
 import circuitImage from '../../assets/MonacoCircuit.png';
 
 
