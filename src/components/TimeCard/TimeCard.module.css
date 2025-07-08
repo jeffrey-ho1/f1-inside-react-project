@@ -1,0 +1,26 @@
+.card {
+    text-align: center;
+}
+
+.location {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.time {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.date {
+    font-size: 1rem;
+    color: #555;
+}
+.localTimeText {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}

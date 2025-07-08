@@ -1,17 +1,15 @@
 import axios from 'axios';
 import { OPENF1_API_BASE_URL } from '../constants/apiConstants';
 
-// stap 1: Mock-functie om een lijst van aankomende races te simuleren.
-// stap 2: Simulatie van een netwerkvertraging van 500ms om laadstatussen te kunnen testen.
-// stap 3: Geef een lijst met race-objecten terug.
-export async function getUpcomingRaces() {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    return [
-        { meeting_key: 1229, meeting_name: 'British Grand Prix', circuit_short_name: 'Silverstone' },
-        { meeting_key: 1230, meeting_name: 'Belgian Grand Prix', circuit_short_name: 'Spa-Francorchamps' },
-        { meeting_key: 1231, meeting_name: 'Dutch Grand Prix', circuit_short_name: 'Zandvoort' },
-    ];
-}
+
+export async function fetchMeetings() {
+        const response = await fetch('https://api.openf1.org/v1/meetings');
+        if (!response.ok) {
+            throw new Error(`API call failed: ${response.status}`);
+        }
+        return await response.json();
+    }
+
 
 // stap 1: Exporteer een functie die de meest recente weerdata van een circuit ophaalt van OpenF1.
 // stap 2: GET-request naar de /weather endpoint met de parameter session_key=latest.

@@ -11,7 +11,7 @@ import LoginPage from './pages/Login/LoginPage.jsx';
 import RegisterPage from './pages/Registreren/RegisterPage.jsx';
 import ProfilePage from './pages/Profiel/ProfilePage.jsx';
 import FavorietenPage from './pages/Favorieten/FavorietenPage.jsx';
-import flagBackground from './assets/FlagBackground.jpg';
+import BodyBackground from './assets/BodyBackground.png'
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
             <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
                 <Header />
-                <main style={{ flex: 1, backgroundImage: `url(${flagBackground})`,
+                <main style={{ flex: 1, backgroundImage: `url(${BodyBackground})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat' }}>
