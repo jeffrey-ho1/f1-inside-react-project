@@ -1,0 +1,39 @@
+.dropdownContainer {
+    position: relative;
+}
+.filterButton {
+    background-color: var(--red-color);
+    color: var(--white-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.dropdownMenu {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 300px;
+    background: var(--white-color);
+    border: 1px solid var(--black-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 15px;
+    z-index: 100;
+}
+
+.dropdownMenu section {
+    margin-bottom: 15px;
+}
+.dropdownMenu h4 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--black-color);
+    padding-bottom: 5px;
+}
+.checkboxItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+}
