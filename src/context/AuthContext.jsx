@@ -2,56 +2,22 @@ import React, { createContext, useState, useContext, useEffect, useCallback } fr
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { loginUser as loginUserApi } from '../api/authApi';
+import { getUserData, updateUserData } from '../api/userDataApi';
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-
-    // Zet deze op 'false' om de mock-data uity te schakelen en de echte logica te activeren.
-    const isDevelopmentMode = true;
-
-
-
-    // --- MOCK DATA SETUP ---
-    // Deze state wordt alleen gebruikt in development mode.
-    const [mockFavorites, setMockFavorites] = useState([
-        { id: 'max_verstappen', name: 'Max Verstappen', team: 'Red Bull Racing', type: 'driver' }
-    ]);
-
-    const mockValue = {
-        user: { username: 'testgebruiker' },
-        isAuthenticated: true,
-        favorites: mockFavorites,
-        isLoading: false,
-        login: (creds) => console.log("Mock Login Aangeroepen met:", creds),
-        logout: () => console.log("Mock Logout Aangeroepen"),
-        addFavorite: (item) => {
-            console.log('Mock: Favoriet toevoegen:', item);
-            setMockFavorites(prev => [...prev, item]);
-        },
-        removeFavorite: (itemId) => {
-            console.log('Mock: Favoriet verwijderen:', itemId);
-            setMockFavorites(prev => prev.filter(i => i.id !== itemId));
-        },
-        isFavorite: (itemId) => mockFavorites.some(fav => fav.id === itemId),
-    };
-
-
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(() => localStorage.getItem('token'));
-    const [favorites, setFavorites] = useState(() => {
-        const savedFavorites = localStorage.getItem('favorites');
-        return savedFavorites ? JSON.parse(savedFavorites) : { drivers: [], teams: [] };
-    });
+    const [favorites, setFavorites] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
-
 
     const logout = useCallback(() => {
         localStorage.removeItem('token');
         setToken(null);
         setUser(null);
-        setFavorites({ drivers: [], teams: [] });
+        setFavorites([]);
         navigate('/');
     }, [navigate]);
 
@@ -59,15 +25,21 @@ export function AuthProvider({ children }) {
         try {
             const { jwt } = await loginUserApi(credentials);
             localStorage.setItem('token', jwt);
-            setToken(jwt);
             const decodedToken = jwtDecode(jwt);
-            setUser({ username: decodedToken.sub });
-            navigate('/nieuws');
+            const username = decodedToken.sub;
+
+            const userData = await getUserData(username, jwt);
+            if (userData && userData.info) {
+                setFavorites(JSON.parse(userData.info));
+            }
+
+            setUser({ username: username, email: userData.email });
+            setToken(jwt);
+            navigate('/profiel');
         } catch (error) {
             console.error("Inloggen mislukt:", error);
         }
     };
-
 
     useEffect(() => {
         if (token) {
@@ -89,23 +61,25 @@ export function AuthProvider({ children }) {
 
 
     useEffect(() => {
-        if (user && user.username) {
-            localStorage.setItem(`favorites_${user.username}`, JSON.stringify(favorites));
+        const saveFavorites = async () => {
+        if (user && token) {
+            const favoritesString = JSON.stringify(favorites);
+            await updateUserData(user.username, favoritesString, token);
         }
-    }, [favorites, user]);
+    };
 
+    saveFavorites().catch(e => console.error("Fout bij opslaan favorieten:", e));
+    }, [favorites, user, token]);
 
     const addFavorite = (item) => { setFavorites(prev => [...prev, item]); };
     const removeFavorite = (itemId) => { setFavorites(prev => prev.filter(i => i.id !== itemId)); };
     const isFavorite = (itemId) => favorites.some(fav => fav.id === itemId);
 
-    const realValue = { user, isAuthenticated: !!user, favorites, isLoading, login, logout, addFavorite, removeFavorite, isFavorite };
-
-    const contextValue = isDevelopmentMode ? mockValue : realValue;
+    const Value ={ user, isAuthenticated: !!user, favorites, isLoading, login,logout, addFavorite, removeFavorite, isFavorite };
 
     return (
-        <AuthContext.Provider value={contextValue}>
-            {!contextValue.isLoading && children}
+        <AuthContext.Provider value={Value}>
+            {children}
         </AuthContext.Provider>
     );
 }

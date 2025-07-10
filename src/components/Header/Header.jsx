@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Header.module.css';
 import FormulaOne from '../../assets/FormulaOne.svg?react';
@@ -10,6 +10,15 @@ import Search from '../../assets/Search.svg?react';
 
 function Header() {
     const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+
+    const handleProfileClick = () => {
+        if (isAuthenticated) {
+            navigate('/profiel'); // Als ingelogd, ga naar profiel
+        } else {
+            navigate('/login'); // Anders, ga naar login
+        }
+    };
 
     return (
         <header className={styles.outerContainerHeader}>
@@ -24,7 +33,7 @@ function Header() {
                                 <Settings/>
                             </button>
                         )}
-                        <button className={styles.iconButtonUser} aria-label="Profiel">
+                        <button onClick={handleProfileClick} className={styles.iconButtonUser} aria-label="Profiel">
                             {isAuthenticated ? <RegisteredUser /> : <UnregisteredUser />}
                         </button>
                 </div>

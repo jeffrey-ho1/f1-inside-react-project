@@ -1,0 +1,26 @@
+.profileContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.details {
+    background-color: var(--white-color);
+    border: 1px solid var(--black-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.details p {
+    margin: 0 0 10px 0;
+}
+.logoutButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: var(--red-color);
+    color: var(--white-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}

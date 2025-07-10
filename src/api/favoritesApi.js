@@ -1,36 +1,42 @@
+import axios from 'axios';
 
+// Dit is de basis-URL van de server die je docent heeft gegeven.
+const API_BASE_URL = 'https://api.datavortex.nl/foneinside';
 
-const mockDrivers = [
-    { id: 'max_verstappen', name: 'Max Verstappen', team: 'Red Bull Racing' },
-    { id: 'lewis_hamilton', name: 'Lewis Hamilton', team: 'Mercedes' },
-    { id: 'lando_norris', name: 'Lando Norris', team: 'McLaren' },
-    { id: 'charles_leclerc', name: 'Charles Leclerc', team: 'Ferrari' },
-    { id: 'sergio_perez', name: 'Sergio Pérez', team: 'Red Bull Racing' },
-    { id: 'oscar_piastri', name: 'Oscar Piastri', team: 'McLaren' },
-];
-
-const mockTeams = [
-    { id: 'red_bull_racing', name: 'Red Bull Racing', points: 450 },
-    { id: 'mercedes', name: 'Mercedes', points: 320 },
-    { id: 'mclaren', name: 'McLaren', points: 280 },
-    { id: 'ferrari', name: 'Ferrari', points: 250 },
-    { id: 'aston_martin', name: 'Aston Martin', points: 180 },
-];
-
-
-export const getAllDrivers = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(mockDrivers);
-        }, 500); // 500ms vertraging
+// Functie om alle coureurs op te halen van de echte server
+export const getAllDrivers = async (token) => {
+    try {
+        // We doen een GET-request naar het /drivers eindpunt
+        const response = await axios.get(`${API_BASE_URL}/drivers`,{
+        headers: {
+            "Content-Type": "application/json",
+                // Voeg de Authorization header toe met het token
+                "Authorization": `Bearer ${token}`,
+        }
     });
+
+        // We geven de lijst met coureurs terug die in response.data zit
+        return response.data;
+    } catch (error) {
+        console.error("Fout bij het ophalen van de coureurs:", error);
+        // Geef een lege lijst terug als er een fout optreedt
+        return [];
+    }
 };
 
-
-export const getAllTeams = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(mockTeams);
-        }, 500); // 500ms vertraging
-    });
+// Functie om alle teams op te halen van de echte server
+export const getAllTeams = async (token) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/teams`,{
+            headers: {
+                "Content-Type": "application/json",
+                // Voeg de Authorization header toe met het token
+                "Authorization": `Bearer ${token}`,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Fout bij het ophalen van de teams:", error);
+        return [];
+    }
 };
