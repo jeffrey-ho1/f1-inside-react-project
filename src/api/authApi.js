@@ -1,13 +1,21 @@
-import axios from 'axios';
-import { NOVI_API_BASE_URL } from '../constants/apiConstants';
-
+import axios from 'axios'
 // Stap 1: Asynchrone functie om een nieuwe gebruiker te registreren.
 // Stap 2: Haal benodigde data uit userData object.
 // Stap 3: Verstuur een POST-request naar de /users endpoint met de gebruikersdata.
 // Stap 4: Geef de data van de server-response terug.
 export async function registerUser(userData) {
     const { username, email, password } = userData;
-    const response = await axios.post(`${NOVI_API_BASE_URL}/users`, { username, email, password, roles: ["USER"] });
+    const response = await axios.post('https://api.datavortex.nl/foneinside/users',{
+        username,
+        email,
+        password,
+        roles: ["USER"]
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Api-Key': 'foneinside:dcxE4x9BZ0Z1iqNx1x1H'
+        }
+    });
     return response.data;
 }
 
@@ -17,6 +25,14 @@ export async function registerUser(userData) {
 // Stap 4: De server stuurt een object met een 'jwt' (token) terug.
 export async function loginUser(credentials) {
     const { username, password } = credentials;
-    const response = await axios.post(`${NOVI_API_BASE_URL}/users/authenticate`, { username, password });
+    const response = await axios.post('https://api.datavortex.nl/foneinside/users/authenticate', {
+        username,
+        password
+    },{
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Api-Key': 'foneinside:dcxE4x9BZ0Z1iqNx1x1H'
+        }
+    });
     return response.data;
 }
