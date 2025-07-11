@@ -1,4 +1,6 @@
 import axios from 'axios'
+
+const apiKey = import.meta.env.VITE_FONEINSIDE_API_KEY;
 // Stap 1: Asynchrone functie om een nieuwe gebruiker te registreren.
 // Stap 2: Haal benodigde data uit userData object.
 // Stap 3: Verstuur een POST-request naar de /users endpoint met de gebruikersdata.
@@ -13,7 +15,7 @@ export async function registerUser(userData) {
     }, {
         headers: {
             'Content-Type': 'application/json',
-            'X-Api-Key': 'foneinside:dcxE4x9BZ0Z1iqNx1x1H'
+            'X-Api-Key': apiKey
         }
     });
     return response.data;
@@ -31,7 +33,7 @@ export async function loginUser(credentials) {
     },{
         headers: {
             'Content-Type': 'application/json',
-            'X-Api-Key': 'foneinside:dcxE4x9BZ0Z1iqNx1x1H'
+            'X-Api-Key': apiKey
         }
     });
     return response.data;
