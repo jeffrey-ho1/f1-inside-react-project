@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = '33e204fef4ff4d908fa49e1b732a18ab';
+const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 const API_URL = 'https://newsapi.org/v2/everything';
 
 export async function getF1News() {
