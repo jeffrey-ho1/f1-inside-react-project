@@ -48,7 +48,7 @@ Volg de onderstaande stappen om de applicatie lokaal op te zetten:
 
 1.  **Clone de repository** naar je lokale machine:
     ```bash
-    git clone [Jouw GitHub Repository Link]
+    git clone [https://github.com/jeffrey-ho1/f1-inside-react-project]
     ```
 2.  **Navigeer** naar de projectmap:
     ```bash
