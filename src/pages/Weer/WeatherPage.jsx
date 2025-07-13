@@ -1,141 +1,88 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './WeatherPage.module.css';
-import { fetchMeetings } from '../../api/openf1Api';
-import RaceSelector from '../../components/RaceSelector/RaceSelector';
+import { getNextRace } from '../../api/favoritesApi'; // Aangepaste import
 import { getWeatherForCircuit } from '../../api/weatherApi';
 import CurrentWeatherCard from '../../components/WeatherCard/CurrentWeatherCard';
 import TimeCard from '../../components/TimeCard/TimeCard';
 import ForecastCard from '../../components/WeatherCard/ForecastCard';
 
 function WeatherPage() {
-    const [circuits, setCircuits] = useState([]);
-    const [selectedCircuitId, setSelectedCircuitId] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [forecastData, setForecastData] = useState([]);
-    const [loadingCircuits, setLoadingCircuits] = useState(true);
-    const [loadingWeather, setLoadingWeather] = useState(false);
+    const [nextRace, setNextRace] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const getCircuitList = async () => {
+        const fetchNextRaceWeather = async () => {
             try {
-                const meetingsData = await fetchMeetings();
-                const uniqueCircuitsMap = new Map();
-                /**
-                 * @param {object} meeting - Een meeting-object van de OpenF1 API.
-                 * @param {number} meeting.circuit_key - De unieke ID van het circuit.
-                 * @param {string} meeting.location - De locatie van de meeting.
-                 * @param {string} [meeting.circuit_short_name] - De (optionele) korte naam.
-                 */
-                meetingsData.forEach(meeting => {
-                    if (meeting && meeting.circuit_key && !uniqueCircuitsMap.has(meeting.circuit_key)) {
-                        uniqueCircuitsMap.set(meeting.circuit_key, {
-                                id: meeting.circuit_key,
-                                name: meeting.location,
-                                shortName: meeting.circuit_short_name || meeting.location
-                            });
-                        }
+                setLoading(true);
+                setError(null);
 
+
+                const raceData = await getNextRace();
+                if (!raceData) {
+                    setError("Kon geen aanstaande race vinden.");
+                    setLoading(false);
+                    return;
+                }
+                setNextRace(raceData);
+
+
+                const weatherApiResponse = await getWeatherForCircuit(raceData.circuit.city);
+                if (!weatherApiResponse) {
+                    setError("Kon de weerdata voor de volgende race niet ophalen.");
+                    setLoading(false);
+                    return;
+                }
+
+
+                const { current, location, forecast } = weatherApiResponse;
+                setWeatherData({
+                    location: raceData.circuit.circuitName,
+                    localtime: location.localtime,
+                    timeZone: location.tz_id,
+                    air_temperature: current.temp_c,
+                    condition: current.condition?.text,
+                    humidity: current.humidity,
+                    wind_speed: current.wind_kph,
+                    track_temperature: (current.temp_c ?? 0) + 5,
+                    sunrise: forecast?.forecastday?.[0]?.astro?.sunrise ?? 'N/A',
+                    sunset: forecast?.forecastday?.[0]?.astro?.sunset ?? 'N/A'
                 });
 
-                const uniqueCircuits = Array.from(uniqueCircuitsMap.values())
-                    .sort((a, b) => a.name.localeCompare(b.name));
-                setCircuits(uniqueCircuits);
-                if (uniqueCircuits.length > 0) {
-                    setSelectedCircuitId(uniqueCircuits[0].id);
-                }
-            } catch (error) {
-                console.error("Kon de circuitlijst niet laden.", error);
-                setError("De lijst met circuits kon niet worden geladen.");
+                setForecastData(forecast?.forecastday?.slice(1).map(day => ({
+                    date: day.date,
+                    high: day.day?.maxtemp_c,
+                    low: day.day?.mintemp_c,
+                    condition: day.day?.condition?.text
+                })) ?? []);
+
+            } catch (e) {
+                setError("Kon de weersvoorspelling niet laden.");
             } finally {
-                setLoadingCircuits(false);
+                setLoading(false);
             }
         };
-        void getCircuitList();
 
-    },[]);
+        void fetchNextRaceWeather();
+    }, []);
 
-
-
-        useEffect(() => {
-                if (!selectedCircuitId || circuits.length === 0) return;
-                const getWeatherData = async () => {
-                    try {
-                        setLoadingWeather(true);
-                        setError(null);
-                        const currentCircuit = circuits.find(c => c.id === Number(selectedCircuitId));
-                        if (!currentCircuit) return;
-
-                        const weatherApiResponse = await getWeatherForCircuit(currentCircuit.shortName);
-
-                        let formattedWeatherData = null;
-                        let formattedForecast = [];
-
-                        if (weatherApiResponse?.current && weatherApiResponse?.location) {
-
-                            const {temp_c, condition, humidity, wind_kph} = weatherApiResponse.current;
-                            const {name, localtime, tz_id} = weatherApiResponse.location;
-                            const astroData = weatherApiResponse.forecast?.forecastday?.[0]?.astro;
-
-                            formattedWeatherData = {
-                                location: currentCircuit.name,
-                                localtime: localtime,
-                                timeZone: tz_id,
-                                air_temperature: temp_c,
-                                condition: condition?.text,
-                                humidity: humidity,
-                                wind_speed: wind_kph,
-                                track_temperature: (temp_c ?? 0) + 5,
-                                sunrise: astroData?.sunrise ?? 'N/A',
-                                sunset: astroData?.sunset ?? 'N/A'
-                            };
-                        }
-
-                        formattedForecast = weatherApiResponse.forecast?.forecastday?.slice(1).map(day => ({
-                            date: day?.date ?? '',
-                            high: day?.day?.maxtemp_c ?? 0,
-                            low: day?.day?.mintemp_c ?? 0,
-                            condition: day?.day?.condition?.text ?? 'Geen data'
-                        })) ?? [];
-
-                        setWeatherData(formattedWeatherData);
-                        setForecastData(formattedForecast);
-                    } catch (e) {
-                        console.error("Kon weerdata niet ophalen.", e);
-                        setError("Kon de weerdata voor dit circuit niet ophalen.");
-                    } finally {
-                        setLoadingWeather(false);
-                    }
-                };
-                void getWeatherData();
-            },
-            [selectedCircuitId, circuits]);
+    if (loading) return <p>Weersvoorspelling voor de volgende race wordt geladen...</p>;
+    if (error) return <p className={styles.errorMessage}>{error}</p>;
 
     return (
         <main className={styles.pageContainer}>
-            <h1 className={styles.pageTitle}>Weer per Circuit</h1>
 
-            {loadingCircuits ? <p>Circuitlijst wordt geladen...</p> : (
-                <RaceSelector
-                    circuits={circuits}
-                    selectedCircuit={selectedCircuitId}
-                    onCircuitChange={setSelectedCircuitId}
-                />
-                )}
+            <h1 className={styles.pageTitle}>Weersvoorspelling: {nextRace?.raceName || "Volgende Race"}</h1>
 
-            {loadingWeather && <p>Actuele weerdata wordt geladen...</p>}
-
-            {error && <p className={styles.errorMessage}>{error}</p>}
-
-            {!loadingCircuits && !loadingWeather && !error && weatherData && (
+            {weatherData && (
                 <>
                     <div className={styles.topGrid}>
                         <CurrentWeatherCard data={weatherData} />
-                        <TimeCard location={weatherData.location}
-                                  timeZone={weatherData.timeZone}
-                        />
+                        <TimeCard location={weatherData.location} timeZone={weatherData.timeZone} />
                     </div>
-                    <h2 className={styles.sectionTitle}>Weersvoorspelling komende dagen</h2>
+                    <h2 className={styles.sectionTitle}>Voorspelling komende dagen</h2>
                     <div className={styles.forecastGrid}>
                         {forecastData.map(day => (
                             <ForecastCard key={day.date} forecast={day} />

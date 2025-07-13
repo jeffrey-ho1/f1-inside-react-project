@@ -15,8 +15,8 @@ export default function Layout({ children }) {
                 className={styles.mainContent}
                 style={{
                     backgroundImage: `url(${flagBackgroundUrl})`,
-                    backgroundSize: '100px', // We gebruiken een vaste grootte voor de test
-                    backgroundRepeat: 'repeat' // Herhaal het patroon
+                    backgroundSize: '100px',
+                    backgroundRepeat: 'repeat'
                 }}
             >
                 {children}

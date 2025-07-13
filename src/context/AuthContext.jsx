@@ -71,7 +71,14 @@ export function AuthProvider({ children }) {
     saveFavorites().catch(e => console.error("Fout bij opslaan favorieten:", e));
     }, [favorites, user, token]);
 
-    const addFavorite = (item) => { setFavorites(prev => [...prev, item]); };
+    const addFavorite = (item) => {
+        setFavorites(prev => {
+            if (prev.some(fav => fav.id === item.id)) {
+                return prev;
+            }
+            return [...prev, item];
+        });
+    };
     const removeFavorite = (itemId) => { setFavorites(prev => prev.filter(i => i.id !== itemId)); };
     const isFavorite = (itemId) => favorites.some(fav => fav.id === itemId);
 

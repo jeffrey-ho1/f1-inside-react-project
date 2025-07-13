@@ -1,0 +1,32 @@
+.pageContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.driverCard {
+    background-color: var(--white-color);
+    border: 1px solid var(--black-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.driverCard h4 {
+    margin: 0 0 0.5rem 0;
+}
+
+.driverCard p {
+    margin: 0;
+    color: #666;
+}
+
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+}

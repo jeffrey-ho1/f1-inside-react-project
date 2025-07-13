@@ -6,7 +6,7 @@ import FormulaOne from '../../assets/FormulaOne.svg?react';
 import Settings from '../../assets/Settings.svg?react';
 import UnregisteredUser from '../../assets/UnregisteredUser.svg?react';
 import RegisteredUser from '../../assets/RegisteredUser.svg?react';
-import Search from '../../assets/Search.svg?react';
+import Search from '../Search/Search';
 
 function Header() {
     const { isAuthenticated } = useAuth();
@@ -14,9 +14,9 @@ function Header() {
 
     const handleProfileClick = () => {
         if (isAuthenticated) {
-            navigate('/profiel'); // Als ingelogd, ga naar profiel
+            navigate('/profiel');
         } else {
-            navigate('/login'); // Anders, ga naar login
+            navigate('/login');
         }
     };
 
@@ -79,9 +79,9 @@ function Header() {
                         </li>
 
                     </ul>
-                        <button className={styles.searchButton} aria-label="Zoeken">
+                    <div className={styles.searchContainerInNav}>
                         <Search />
-                        </button>
+                    </div>
             </nav>
         </header>
     );

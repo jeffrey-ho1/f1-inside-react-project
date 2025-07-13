@@ -1,0 +1,35 @@
+.pageContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.teamCard {
+    background-color: var(--white-color);
+    border: 1px solid var(--black-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.teamCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.teamCard h4 {
+    margin: 0;
+    font-size: 1.25rem;
+}

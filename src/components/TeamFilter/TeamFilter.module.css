@@ -1,0 +1,14 @@
+.filterContainer {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filterSelect {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--black-color);
+    background-color: var(--white-color);
+    font-size: 1rem;
+}
