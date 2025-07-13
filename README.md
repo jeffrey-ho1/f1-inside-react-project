@@ -24,7 +24,7 @@ De kernfunctionaliteiten zijn:
 ## Screenshot
 Hieronder staat een screenshot van de nieuwspagina van de applicatie.
 
-![Screenshot van de F1 Inside nieuwspagina](HIER_DE_LINK_NAAR_JE_SCREENSHOT)
+![Screenshot van de F1 Inside nieuwspagina](https://github.com/jeffrey-ho1/f1-inside-react-project/blob/main/public/Images/Screenshot-news-page.png?raw=true)
 
 ---
 
